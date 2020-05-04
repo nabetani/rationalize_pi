@@ -13,16 +13,17 @@ def pi(n)
   (0..n).sum{|e| fb(e) }
 end
 
-PI = pi(400)
+PI = pi(1000)
 
-p (PI-Math::PI.to_r).to_f
-
-(1..200).map{ |e|
-  PI.rationalize(0.5**(e/2))
+puts( "                                    value      delta  value-Math::PI" )
+puts( "-----------------------------------------  ---------  ---------" )
+(1..500).map{ |e|
+  #Nabetani.rationalize(PI, 0.5**(e/2))
+  PI.rationalize((0.5**(e/4.0)).to_r)
 }.uniq.each do |pi|
   real_delta = (pi-PI).to_f
   delta_d = (pi-Math::PI.to_r).to_f
-  s = "%d/%d" % [ pi.numerator, pi.denominator ]
-  puts( "%17s  %8e  %8e" % [ s, real_delta, delta_d ] )
+  s = "%d / %d" % [ pi.numerator, pi.denominator ]
+  puts( "%41s  %+.2e  %+.2e" % [ s, real_delta, delta_d ] )
 end
 
